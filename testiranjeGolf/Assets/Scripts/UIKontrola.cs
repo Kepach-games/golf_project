@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class UIKontrola : MonoBehaviour {
 
-    public Button buttonX;
+    [SerializeField]
+    private Button buttonX;
+
+    [SerializeField]
+    private Canvas PauseMenu;
 
     public void Awake()
     {
@@ -15,7 +19,10 @@ public class UIKontrola : MonoBehaviour {
 
     void BtnXOnClick()
     {
-        SceneManager.LoadScene("MainMenu");
+        if (PauseMenu.enabled == true)
+            PauseMenu.enabled = false;
+        else
+            PauseMenu.enabled = true;
     }
 
 }
