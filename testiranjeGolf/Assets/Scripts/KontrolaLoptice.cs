@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class KontrolaLoptice : MonoBehaviour {
 
-
-
     private LineRenderer linijaPravca;  // Linija indikatora pravca
-
 	private Rigidbody2D rigb;  // 2D telo (fizika) loptice
-
 	bool indikator_dodira = false;
-    [SerializeField]
     private float speed;
 	float startPosX;
 	float krajPosX;
 	float startPosY;
 	float krajPosY;
-
 	float brzina = 3;
 
 	Vector2 tackaPom;
@@ -80,9 +74,7 @@ public class KontrolaLoptice : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		// Koristimo u slucaju da loptica dodirne prepreku
-
-
-		//rigb.velocity = Vector2.zero;
+        if (other.gameObject.tag == "Monster")
+            other.gameObject.SetActive(false);
 	}
 }

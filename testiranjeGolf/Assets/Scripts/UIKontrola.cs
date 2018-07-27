@@ -18,23 +18,22 @@ public class UIKontrola : MonoBehaviour {
 
     public void Awake()
     {
-        PauseMenu.enabled = false;
         ButtonX.onClick.AddListener(PauseToggle);
     }
 
     void PauseToggle()
     {
-        if (PauseMenu.enabled == true) //Izlazak iz pauze
+        if (PauseMenu.gameObject.activeSelf == true) //Izlazak iz pauze
         {
             ButtonX.gameObject.SetActive(true);
-            PauseMenu.enabled = false;
+            PauseMenu.gameObject.SetActive(false);
             ButtonPlay.onClick.RemoveAllListeners();
             ButtonExit.onClick.RemoveAllListeners();
         }
         else //Ulazak u pauzu
         {
             ButtonX.gameObject.SetActive(false);
-            PauseMenu.enabled = true;
+            PauseMenu.gameObject.SetActive(true);
             ButtonPlay.onClick.AddListener(PauseToggle);
             ButtonExit.onClick.AddListener(BtnExtitOnClick);
         }
