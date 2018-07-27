@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class KontrolaLoptice : MonoBehaviour {
 
-	private LineRenderer linijaPravca;  // Linija indikatora pravca
+
+
+    private LineRenderer linijaPravca;  // Linija indikatora pravca
 
 	private Rigidbody2D rigb;  // 2D telo (fizika) loptice
 
 	bool indikator_dodira = false;
-
+    [SerializeField]
+    private float speed;
 	float startPosX;
 	float krajPosX;
 	float startPosY;
@@ -25,12 +28,16 @@ public class KontrolaLoptice : MonoBehaviour {
 		rigb = GetComponent<Rigidbody2D> ();
 	}
 
-	void Update () {
-
+    void Update () {
+        if (rigb.IsAwake())
+        {
+            if ((speed = rigb.velocity.magnitude) < 0.45f)
+                rigb.velocity=Vector2.zero; 
+        }
 	}
 		
 	void OnMouseDown() { 
-		if (rigb.IsSleeping ()) { // IsSleeping proverava da li je loptica potpuno mirna da bi se novi potez mogao otpoceti (posto u poslednjim trenucima usporavanja loptica nastavlja sa gotovo neprimetnim kretanjem, valjalo bi ubaciti proveru u Update () gde ako je brzina loptice (gameObject.Velocity) manja od neke male zadate vrednosti, ona se automatski postavlja na 0 radi manjeg cekanja za zaustavljanje loptice
+		if (rigb.IsSleeping ()) { // IsSleeping proverava da li je loptica potpuno mirna da bi se novi potez mogao otpoceti
 			linijaPravca.positionCount = 2;
 			startPosX = Input.mousePosition.x;
 			startPosY = Input.mousePosition.y;
